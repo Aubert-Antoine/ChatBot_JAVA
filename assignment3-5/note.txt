@@ -1,0 +1,2 @@
+private String token = "add your token :) from OpenAI" in MessaageController.java
+a remplacer par son propre token OpenAI
