@@ -7,15 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @RestController
 public class MessageController {
     @Autowired
     private MessageRepository repository;
-    private String token = "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";
+    final private String token = "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";
     CompletionRequest request;
     String model ="text-davinci-002";
     OpenAiService service;
     CompletionResult response;
+
     @GetMapping("/MessageList")
     public Iterable<Message> getMessages() {
         // change return null to something more appropriate
@@ -32,6 +38,27 @@ public class MessageController {
         for the message of the user and “Answer”
 
        */
+
+        Message myMess = new Message();
+
+        //set date / type / id --> auto fill / txt
+
+        // set the date
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        myMess.setMessageDate(dtf.format(now));
+        myMess.setMessageText(message);
+        myMess.setMessageType("Question");
+
+        //repository
+        repository.save(myMess);
+
+
+
+
+
+
 
         return new RedirectView("");
 
