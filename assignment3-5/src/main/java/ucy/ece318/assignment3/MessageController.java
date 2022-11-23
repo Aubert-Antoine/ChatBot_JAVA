@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class MessageController {
     @Autowired
     private MessageRepository repository;
-    private String token = "add your token :) from OpenAI";
+    private String token = "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";
     CompletionRequest request;
     String model ="text-davinci-002";
     OpenAiService service;
