@@ -46,8 +46,6 @@ public class MessageController {
 
         Message messInput = new Message();
 
-        //set date / type / id --> auto fill / txt
-
         // set the date
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -64,9 +62,7 @@ public class MessageController {
         request.setPrompt(message);
         response = service.createCompletion(request);
         List<CompletionChoice> responses = response.getChoices();
-        for(CompletionChoice c: responses){
-            System.out.println(c.getText());
-        }
+
 
         /*
         Make a mess for the response
@@ -74,7 +70,11 @@ public class MessageController {
         Message messOutput = new Message();
         messOutput.setMessageType("Answer");
         messOutput.setMessageDate(dtf.format(LocalDateTime.now()));
-        messOutput.setMessageText(responses.toString());
+        for(CompletionChoice c: responses){
+            System.out.println(c.getText());
+            messOutput.setMessageText(responses.toString());
+        }
+
 
         if(debug) System.out.println(String.format("The message output of openAi is %s",messOutput.getMessageText()));
 
