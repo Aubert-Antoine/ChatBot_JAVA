@@ -93,8 +93,7 @@ public class MessageController {
             if (message.getId() == id) {
                 repository.delete(message);
             }
-        }
-
+        }//for
         return new RedirectView("");
 
     }
