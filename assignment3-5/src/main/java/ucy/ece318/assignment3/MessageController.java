@@ -19,7 +19,7 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageRepository repository;
-    final private String token = "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";
+    final private String token = "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";
 
     final private boolean debug = true;
     CompletionRequest request = new CompletionRequest();;
@@ -51,14 +51,16 @@ public class MessageController {
         LocalDateTime now = LocalDateTime.now();
 
         messInput.setMessageDate(dtf.format(now));
-        messInput.setMessageType("Question");
         messInput.setMessageText(message);
+        messInput.setMessageType("Question");
 
         repository.save(messInput);
 
         /*
         request to openAI :
          */
+        request.setMaxTokens(40);
+        request.setModel(model);
         request.setPrompt(message);
         response = service.createCompletion(request);
         List<CompletionChoice> responses = response.getChoices();
@@ -69,14 +71,16 @@ public class MessageController {
          */
         Message messOutput = new Message();
         messOutput.setMessageType("Answer");
-        messOutput.setMessageDate(dtf.format(LocalDateTime.now()));
+        messOutput.setMessageDate(new Date().toString());
+        String out = "";
         for(CompletionChoice c: responses){
             System.out.println(c.getText());
-            messOutput.setMessageText(responses.toString());
+            out +=c.getText();
         }
 
+        messOutput.setMessageText(out);
 
-        if(debug) System.out.println(String.format("The message output of openAi is %s",messOutput.getMessageText()));
+       // if(debug) System.out.println(String.format("The message output of openAi is %s",messOutput.getMessageText()));
 
         repository.save(messOutput);
 

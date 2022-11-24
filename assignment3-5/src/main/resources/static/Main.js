@@ -12,12 +12,12 @@ constructor(props) {
         return (
         <div>
               {this.props.messages.map((message,i) => {
-                      if(message.type==="Question"){
+                      if(message.messageType==="Question"){
                                return(  <p>here you should add an object for QuestionMessage </p> )
 
                       }
                       else{
-                            return   (<p>here you should add an object for AnswerMessage </p> )
+                            return   (<AnswerMessage message={message}/> )
                       }
                       })
                   }
@@ -65,7 +65,7 @@ function AnswerMessage(props){
                 <div className="media w-50  ml-auto mb-3">
                     <div className="media-body">
                         <div className="bg-primary rounded py-2 px-3 mb-2">
-                            <p className="text-small mb-0 text-white">"hello"
+                            <p className="text-small mb-0 text-white">{props.message.messageText}
                             </p>
                         </div>
                         <p className="small text-muted">"Date"</p>
