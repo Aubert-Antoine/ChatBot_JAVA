@@ -13,11 +13,11 @@ constructor(props) {
             <div>
                   {this.props.messages.map((message,i) => {
                           if(message.messageType==="Question"){
-                                   return(  <QuestionMessage message={message}/> )
+                              return(QuestionMessage(message))
 
                           }
                           else {
-                              return (<AnswerMessage message={message}/>)
+                              return (AnswerMessage(message))
                           }
                         })
                   }
@@ -28,6 +28,7 @@ constructor(props) {
 
 function QuestionMessage(props){
   return (
+
 <div id="questionMessage">
     <table >
         <tbody>
@@ -38,10 +39,9 @@ function QuestionMessage(props){
                     </img>
                     <div className="media-body ml-3">
                         <div className="bg-light rounded py-2 px-3 mb-2">
-                            <p className="text-small mb-0 text-muted"> "hello"
-                            </p>
+                            <p className="text-small mb-0 text-muted"> {props.messageText}</p>
                         </div>
-                        <p className="small text-muted">"Date"</p>
+                        <p className="small text-muted">{props.messageDate}</p>
                     </div>
                 </div>
             </td>
@@ -63,10 +63,9 @@ function AnswerMessage(props){
                     <div className="media w-50  ml-auto mb-3">
                         <div className="media-body">
                             <div className="bg-primary rounded py-2 px-3 mb-2">
-                                <p className="text-small mb-0 text-white">{props.message.messageText}
-                                </p>
+                                <p className="text-small mb-0 text-white">{props.messageText}</p>
                             </div>
-                            <p className="small text-muted">"Date"</p>
+                            <p className="small text-muted">{props.messageDate}</p>
                         </div>
                     </div>
                 </td>

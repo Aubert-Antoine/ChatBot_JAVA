@@ -74,7 +74,6 @@ public class MessageController {
         messOutput.setMessageDate(new Date().toString());
         String out = "";
         for(CompletionChoice c: responses){
-            System.out.println(c.getText());
             out +=c.getText();
         }
 

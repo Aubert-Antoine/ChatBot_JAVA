@@ -16,7 +16,7 @@ public class Message {
     private String messageType; //Answer or Question
 
 
-    Message(){
+    public Message(){
         this.id=0;
         this.messageText="";
         this.messageDate="";
