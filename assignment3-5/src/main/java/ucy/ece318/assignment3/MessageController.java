@@ -19,7 +19,7 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageRepository repository;
-    final private String token = "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";
+    final private String token = "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";
 
     final private boolean debug = true;
     CompletionRequest request = new CompletionRequest();;

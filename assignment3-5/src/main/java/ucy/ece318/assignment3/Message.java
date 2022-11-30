@@ -15,6 +15,14 @@ public class Message {
     private String messageDate;
     private String messageType; //Answer or Question
 
+
+    Message(){
+        this.id=0;
+        this.messageText="";
+        this.messageDate="";
+        this.messageType="";
+    }
+
     public int getId() {
         return id;
     }

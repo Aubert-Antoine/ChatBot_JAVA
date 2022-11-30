@@ -7,23 +7,21 @@ constructor(props) {
     render() {
         if (!this.props.messages) {
             return <div>No Messages yet...</div>
-        }
+            }
 
         return (
-        <div>
-              {this.props.messages.map((message,i) => {
-                      if(message.messageType==="Question"){
-                               return(  <p>here you should add an object for QuestionMessage </p> )
+            <div>
+                  {this.props.messages.map((message,i) => {
+                          if(message.messageType==="Question"){
+                                   return(  <QuestionMessage message={message}/> )
 
-                      }
-                      else{
-                            return   (<AnswerMessage message={message}/> )
-                      }
-                      })
+                          }
+                          else {
+                              return (<AnswerMessage message={message}/>)
+                          }
+                        })
                   }
-
-
-         </div>
+             </div>
         );
     }
 }
@@ -56,27 +54,26 @@ function QuestionMessage(props){
 }
 function AnswerMessage(props){
   return (
-<div id="answerMessage">
-    <table >
-        <tbody>
-        <tr>
-            <td> </td>
-            <td>
-                <div className="media w-50  ml-auto mb-3">
-                    <div className="media-body">
-                        <div className="bg-primary rounded py-2 px-3 mb-2">
-                            <p className="text-small mb-0 text-white">{props.message.messageText}
-                            </p>
+    <div id="answerMessage">
+        <table >
+            <tbody>
+            <tr>
+                <td> </td>
+                <td>
+                    <div className="media w-50  ml-auto mb-3">
+                        <div className="media-body">
+                            <div className="bg-primary rounded py-2 px-3 mb-2">
+                                <p className="text-small mb-0 text-white">{props.message.messageText}
+                                </p>
+                            </div>
+                            <p className="small text-muted">"Date"</p>
                         </div>
-                        <p className="small text-muted">"Date"</p>
                     </div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
   )
 }
 
@@ -105,7 +102,7 @@ class MessageArea extends React.Component {
         return (
             <div id="main">
                 <Messages messages={this.state.messages}/>
-   </div>
+            </div>
         );
     }
 }
