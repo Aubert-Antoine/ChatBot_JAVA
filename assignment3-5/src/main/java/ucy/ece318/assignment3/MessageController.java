@@ -19,12 +19,13 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageRepository repository;
-    final private String token = "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";
+    final private String tokenPerso = "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";
+    final private String token = "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";
 
     final private boolean debug = true;
-    CompletionRequest request = new CompletionRequest();;
-    String model ="text-davinci-002";
-    OpenAiService service = new OpenAiService(token); ;
+    CompletionRequest request = new CompletionRequest();
+    String model = "text-davinci-002";
+    OpenAiService service = new OpenAiService(token);
     CompletionResult response;
 
     @GetMapping("/MessageList")
@@ -32,6 +33,7 @@ public class MessageController {
         // change return null to something more appropriate
         return repository.findAll();
     }
+
     @GetMapping("/addMessageandResponse")
     public RedirectView addMessageandResponse(@RequestParam final String message) {
       /*
@@ -59,7 +61,7 @@ public class MessageController {
         /*
         request to openAI :
          */
-        request.setMaxTokens(40);
+        request.setMaxTokens(250);
         request.setModel(model);
         request.setPrompt(message);
         response = service.createCompletion(request);
@@ -72,14 +74,14 @@ public class MessageController {
         Message messOutput = new Message();
         messOutput.setMessageType("Answer");
         messOutput.setMessageDate(new Date().toString());
-        String out = "";
-        for(CompletionChoice c: responses){
-            out +=c.getText();
+        StringBuilder out = new StringBuilder();
+        for (CompletionChoice c : responses) {
+            out.append(c.getText());
         }
 
-        messOutput.setMessageText(out);
+        messOutput.setMessageText(out.toString());
 
-       // if(debug) System.out.println(String.format("The message output of openAi is %s",messOutput.getMessageText()));
+        // if(debug) System.out.println(String.format("The message output of openAi is %s",messOutput.getMessageText()));
 
         repository.save(messOutput);
 
@@ -87,10 +89,11 @@ public class MessageController {
 
 
     }
+
     @GetMapping("/deleteMessage")
     public RedirectView deleteMessage(@RequestParam Integer id) {
         // add code to delete message
-        for (Message message: getMessages()) {
+        for (Message message : getMessages()) {
             if (debug) String.format("Liste des messages : %s", message.getMessageText());
 
             if (message.getId() == id) {
@@ -101,4 +104,16 @@ public class MessageController {
 
     }
 
+    @GetMapping("/500")
+    public RedirectView error500() {
+        System.out.println("500 error catch");
+        return new RedirectView("");
+
+    }
+    @GetMapping("/login")
+    public RedirectView executeOnce() {
+        System.out.println("I only want to do this once");
+        return new RedirectView("");
+
+    }
 }
