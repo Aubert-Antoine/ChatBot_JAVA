@@ -87,7 +87,7 @@ public class MessageController {
 
         repository.save(messOutput);
 
-        return new RedirectView("");
+        return new RedirectView("index.html");
 
 
     }
@@ -102,20 +102,13 @@ public class MessageController {
                 repository.delete(message);
             }
         }//for
-        return new RedirectView("");
+        return new RedirectView("index.html");
 
     }
 
-    @GetMapping("/500")
-    public RedirectView error500() {
-        System.out.println("500 error catch");
-        return new RedirectView("");
-
-    }
-    @GetMapping("/login")
+    @GetMapping("/")
     public RedirectView executeOnce() {
-        System.out.println("I only want to do this once");
-        return new RedirectView("");
+        return new RedirectView("login.html");
 
     }
 }
