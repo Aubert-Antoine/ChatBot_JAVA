@@ -19,8 +19,10 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageRepository repository;
-    final private String tokenPerso = "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";
-    final private String token = "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";
+    final private String token1 = "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";
+    final private String token2 = "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";
+
+    final private String token = "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";
 
     final private boolean debug = true;
     CompletionRequest request = new CompletionRequest();
