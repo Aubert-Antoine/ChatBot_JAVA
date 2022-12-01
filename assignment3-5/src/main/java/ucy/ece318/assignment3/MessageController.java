@@ -4,12 +4,10 @@ import com.theokanning.openai.completion.CompletionChoice;
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.completion.CompletionResult;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -17,14 +15,9 @@ import java.util.List;
 
 @RestController
 public class MessageController {
-    @Autowired
     private MessageRepository repository;
-    final private String token1 = "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";
-    final private String token2 = "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";
+    final private String token = "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";
 
-    final private String token = "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";
-
-    final private boolean debug = true;
     CompletionRequest request = new CompletionRequest();
     String model = "text-davinci-002";
     OpenAiService service = new OpenAiService(token);
@@ -96,7 +89,6 @@ public class MessageController {
     public RedirectView deleteMessage(@RequestParam Integer id) {
         // add code to delete message
         for (Message message : getMessages()) {
-            if (debug) String.format("Liste des messages : %s", message.getMessageText());
 
             if (message.getId() == id) {
                 repository.delete(message);
